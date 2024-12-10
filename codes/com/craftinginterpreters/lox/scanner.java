@@ -21,8 +21,8 @@ class Scanner {
     List<Token> scanTokens() {
         while (!isAtEnd()) {
           // We are at the beginning of the next lexeme.
-          start = current;
-          scanToken();
+            start = current;
+            scanToken();
         }
     
         tokens.add(new Token(EOF, "", null, line));
@@ -105,7 +105,7 @@ class Scanner {
         addToken(type, null);
     }
     
-      private void addToken(TokenType type, Object literal) {
+        private void addToken(TokenType type, Object literal) {
         String text = source.substring(start, current);
         tokens.add(new Token(type, text, literal, line));
     }
