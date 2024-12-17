@@ -137,18 +137,22 @@ class Scanner {
         addToken(NUMBER,Double.parseDouble(source.substring(start, current)));
     }
 
-    private void string(){//stringgggggggggggggggg
-        while (peek() != '"' && !isAtEnd()) {
+    private void string(){//stringgggggggggggggggg "があったとき
+        while (peek() != '"' && !isAtEnd()) {//文字が"ではないかつ終わりのとき
             if (peek() == '\n') line++;
-            advance();
+            if (peek() == '\\' && peekNext() == '"'){
+                advance();//return source.charAt(current++);
+            }
+            advance();//return source.charAt(current++);
         }
 
-        if (isAtEnd()) {
+
+        if (isAtEnd()) {//文字列が終わり　で"が無いとき
             Lox.error(line, "Unterminated string.");
             return;
         }
 
-        advance();
+        advance();//return source.charAt(current++);
 
         String value = source.substring(start + 1, current - 1);
         addToken(STRING, value);
